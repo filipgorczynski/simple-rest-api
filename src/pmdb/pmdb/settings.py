@@ -42,14 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
-THIRD_PARTY_APPS = [
+    'django_extensions',
     'rest_framework',
 ]
+
 PROJECT_APPS = [
     'apps.movie',
 ]
-INSTALLED_APPS += THIRD_PARTY_APPS + PROJECT_APPS
+INSTALLED_APPS += PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,4 +131,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-OMDB_API_KEY = config.get('OMDB_APIKEY', '')
+OMDB_API_KEY = config.get('omdb', 'api_key')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    )
+}
