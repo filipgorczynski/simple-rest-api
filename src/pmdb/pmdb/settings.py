@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from configparser import RawConfigParser
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+config = RawConfigParser()
+config_file_path = os.path.join(BASE_DIR, 'credentials.conf')
+config.read(config_file_path)
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
+PROJECT_APPS = [
+    'apps.movie',
+]
+INSTALLED_APPS += THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -118,3 +130,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+OMDB_API_KEY = config.get('OMDB_APIKEY', '')
