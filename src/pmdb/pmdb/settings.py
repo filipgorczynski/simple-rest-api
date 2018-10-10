@@ -132,6 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 OMDB_API_KEY = config.get('omdb', 'api_key')
+OMDB_ROOT_URL = config.get('omdb', 'root_url')
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

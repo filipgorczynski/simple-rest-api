@@ -1,0 +1,48 @@
+[
+  {
+    "model": "movie.Movie",
+    "pk": 1,
+    "fields": {
+      "title": "The Matrix",
+      "year": "1999",
+      "rated": "R",
+      "released": "1999-03-31",
+      "runtime": "136 min",
+      "genre": [
+        1,
+        6
+      ],
+      "director": [
+        2,
+        3
+      ],
+      "writer": "Lilly Wachowski, Lana Wachowski",
+      "actor": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "plot": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+      "language": "English",
+      "country": "USA",
+      "awards": "Won 4 Oscars. Another 34 wins & 48 nominations.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "rating": [
+        1,
+        2,
+        3
+      ],
+      "metascore": "73",
+      "imdb_rating": "8.7",
+      "imdb_votes": "1,435,731",
+      "imdb_id": "tt0133093",
+      "type": "movie",
+      "dvd": "1999-08-21",
+      "box_office": "N/A",
+      "production": "Warner Bros. Pictures",
+      "website": "http://www.whatisthematrix.com"
+    }
+  }
+]

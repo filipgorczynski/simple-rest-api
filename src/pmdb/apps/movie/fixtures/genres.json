@@ -1,0 +1,50 @@
+[
+  {
+    "model": "movie.Genre",
+    "pk": 1,
+    "fields": {
+      "id": "1",
+      "name": "Action"
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 2,
+    "fields": {
+      "id": "2",
+      "name": "Comedy"
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 3,
+    "fields": {
+      "id": "3",
+      "name": "Horror"
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 4,
+    "fields": {
+      "id": "4",
+      "name": "Adventure"
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 5,
+    "fields": {
+      "id": "5",
+      "name": "Musical"
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 6,
+    "fields": {
+      "id": "6",
+      "name": "Sci-Fi"
+    }
+  }
+]

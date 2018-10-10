@@ -18,10 +18,11 @@ from django.contrib import admin
 
 from rest_framework import routers
 
-from apps.movie.rest_views import MovieViewSet
+from apps.movie.rest_views import CommentViewSet, MovieViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'movie', MovieViewSet, base_name='movie')
+router.register(r'comment', CommentViewSet, base_name='comment')
 
 
 urlpatterns = [

@@ -1,0 +1,30 @@
+[
+  {
+    "model": "movie.Rating",
+    "pk": 1,
+    "fields": {
+      "id": "1",
+      "source": "Internet Movie Database",
+      "value": "8.7/10"
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 2,
+    "fields": {
+      "id": "2",
+      "source": "Rotten Tomatoes",
+      "value": "87%"
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 3,
+    "fields": {
+      "id": "3",
+      "source": "Metacritic",
+      "value": "73/100"
+    }
+  },
+
+]

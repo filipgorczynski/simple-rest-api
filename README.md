@@ -1,6 +1,7 @@
 # Simple REST API
 
-Build simple REST API for us - a basic movie database interacting with external API. Here's full specification of endpoints that we'd like it to have:
+Build simple REST API for us - a basic movie database interacting with external API.
+Full specification of endpoints:
 
 **POST /movies:**
 
@@ -75,6 +76,7 @@ python manage.py migrate
 ## Test
 Just run
 ```bash
+cd src/pmdb
 pytest
 ```
 from command line
@@ -83,4 +85,10 @@ from command line
 For development purposes:
 ```bash
 (venv) python manage.py runserver
+```
+
+# Other
+
+```
+python manage.py show_urls
 ```
