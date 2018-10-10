@@ -64,10 +64,10 @@ class MovieViewSet(viewsets.ModelViewSet):
     @action(methods=['GET'], detail=False)
     def top(self, request):
         """
-
+        Movie.objects.union(Comment.objects.all().prefetch_related('movie').annotate(total=Count('movie_id')).order_by(F('-total')))
+        Movie.objects.filter(comments__movie=movie).annotate(total=Count('movie')).order_by('-total')
         """
-        top_movies = Comment.objects.all().prefetch_related('movie').annotate(
-            total=Count('movie_id')).order_by('-total')
+        top_movies = Comment.objects.all().prefetch_related('movie').annotate(total=Count('movie_id')).order_by('-total')
 
         serializer = MovieGetSerializer(data=top_movies, many=True)
         serializer.is_valid()

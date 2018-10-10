@@ -109,7 +109,7 @@ class Movie(TimeStampedModel):
 
 class Comment(TimeStampedModel):
     body = models.TextField()
-    movie = models.ForeignKey(Movie, related_name='movies')
+    movie = models.ForeignKey(Movie, related_name='comments')
 
     def __str__(self):
         return self.body
