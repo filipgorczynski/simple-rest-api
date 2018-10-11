@@ -1,13 +1,6 @@
 from django.contrib import admin
 
-from apps.movie.models import (
-    Actor,
-    Comment,
-    Director,
-    Genre,
-    Movie,
-    Rating,
-)
+from apps.movie.models import Actor, Comment, Director, Genre, Movie, Rating
 
 
 class ActorAdmin(admin.ModelAdmin):

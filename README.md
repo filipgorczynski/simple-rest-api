@@ -8,7 +8,7 @@ Full specification of endpoints:
 
 **POST /movies:**
 
-- [ ] Request body should contain only movie title, and its presence should be validated.
+- [X] Request body should contain only movie title, and its presence should be validated.
 - [X] Based on passed title, other movie details should be fetched from http://www.omdbapi.com/
       (or other similar, public movie database) - and saved to application database.
 - [ ] Request response should include full movie object, along with all data fetched from external API.
@@ -91,6 +91,11 @@ cd src/pmdb
 pytest
 ```
 from command line
+
+## Code Style
+```
+flake8 src/
+```
 
 ## Run
 For development purposes:

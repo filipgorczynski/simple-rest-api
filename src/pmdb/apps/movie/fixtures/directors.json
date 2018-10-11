@@ -4,7 +4,9 @@
     "pk": 1,
     "fields": {
       "id": "1",
-      "name": "James Cameron"
+      "name": "James Cameron",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
     }
   },
   {
@@ -12,14 +14,32 @@
     "pk": 2,
     "fields": {
       "id": "2",
-      "name": "Lana Wachowski"
+      "name": "Lana Wachowski",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [1]
     }
-  },{
+  },
+  {
     "model": "movie.Director",
     "pk": 3,
     "fields": {
       "id": "3",
-      "name": "Lilly Wachowski"
+      "name": "Lilly Wachowski",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [1]
+    }
+  },
+  {
+    "model": "movie.Director",
+    "pk": 4,
+    "fields": {
+      "id": "4",
+      "name": "Peter Jackson",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [2]
     }
   }
 ]

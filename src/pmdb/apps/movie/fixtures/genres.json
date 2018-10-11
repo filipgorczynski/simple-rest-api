@@ -4,7 +4,10 @@
     "pk": 1,
     "fields": {
       "id": "1",
-      "name": "Action"
+      "name": "Action",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [1]
     }
   },
   {
@@ -12,7 +15,9 @@
     "pk": 2,
     "fields": {
       "id": "2",
-      "name": "Comedy"
+      "name": "Comedy",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
     }
   },
   {
@@ -20,7 +25,9 @@
     "pk": 3,
     "fields": {
       "id": "3",
-      "name": "Horror"
+      "name": "Horror",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
     }
   },
   {
@@ -28,7 +35,9 @@
     "pk": 4,
     "fields": {
       "id": "4",
-      "name": "Adventure"
+      "name": "Adventure",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
     }
   },
   {
@@ -36,7 +45,9 @@
     "pk": 5,
     "fields": {
       "id": "5",
-      "name": "Musical"
+      "name": "Musical",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
     }
   },
   {
@@ -44,7 +55,32 @@
     "pk": 6,
     "fields": {
       "id": "6",
-      "name": "Sci-Fi"
+      "name": "Sci-Fi",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [1]
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 7,
+    "fields": {
+      "id": "7",
+      "name": "Drama",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [2]
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 8,
+    "fields": {
+      "id": "8",
+      "name": "Fantasy",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [2]
     }
   }
 ]

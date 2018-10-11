@@ -1,6 +1,6 @@
 from django_filters import rest_framework as filters
 
-from apps.movie.models import Movie, Comment
+from apps.movie.models import Comment, Movie
 
 
 class MovieFilter(filters.FilterSet):

@@ -6,13 +6,6 @@ from apps.movie.serializers import CommentSerializer
 
 
 class CommentSerializerTestCase(unittest.TestCase):
-    fixtures = [
-        'actors',
-        'directors'
-        'genres',
-        'ratings',
-        'movies',
-    ]
 
     @pytest.mark.skip("TODO")
     def test_valid_data(self):

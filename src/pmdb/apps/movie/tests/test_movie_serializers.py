@@ -2,7 +2,7 @@ import unittest
 
 import pytest
 
-from apps.movie.serializers import MoviePostSerializer, MovieGetSerializer
+from apps.movie.serializers import MovieGetSerializer, MoviePostSerializer
 
 
 class MoviePostSerializerTestCase(unittest.TestCase):

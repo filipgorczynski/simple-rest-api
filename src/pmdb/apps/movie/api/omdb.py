@@ -8,7 +8,7 @@ def search_movie_by_title(title):
 
     params = {
         'apikey': settings.OMDB_API_KEY,
-        't': title
+        't': title,
     }
     response = requests.get(settings.OMDB_ROOT_URL, params=params)
     return response.json()

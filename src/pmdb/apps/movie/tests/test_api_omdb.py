@@ -1,11 +1,9 @@
-"""
-Requires requests.get() mock as currently it tests for remote services.
-"""
+"""Requires requests.get() mock as currently it tests for remote services."""
 import pytest
 from django.test import TestCase
+from mock import mock
 
 from apps.movie.api.omdb import search_movie_by_title
-
 
 VALID_MOVIE_RESPONSE = {
     "Title": "The Matrix",
@@ -16,12 +14,22 @@ VALID_MOVIE_RESPONSE = {
     "Genre": "Action, Sci-Fi",
     "Director": "Lana Wachowski, Lilly Wachowski",
     "Writer": "Lilly Wachowski, Lana Wachowski",
-    "Actors": "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving",
-    "Plot": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+    "Actors": (
+        "Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, "
+        "Hugo Weaving"),
+    "Plot": (
+        "A computer hacker learns from mysterious rebels about the true "
+        "nature of his reality and his role in the war against its "
+        "controllers."
+    ),
     "Language": "English",
     "Country": "USA",
     "Awards": "Won 4 Oscars. Another 34 wins & 48 nominations.",
-    "Poster": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+    "Poster": (
+        "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkL"
+        "WI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@"
+        "._V1_SX300.jpg"
+    ),
     "Ratings": [
         {
             "Source": "Internet Movie Database",
@@ -48,6 +56,11 @@ VALID_MOVIE_RESPONSE = {
     "Response": "True"
 }
 
+INVALID_MOVIE_RESPONSE_MOVIE_NOT_FOUND = {
+    "Response": "False",
+    "Error": "Movie not found!"
+}
+
 
 class ApiOMDBTestCase(TestCase):
 
@@ -64,11 +77,19 @@ class ApiOMDBTestCase(TestCase):
         self.assertEqual(response.get('Error'), "Invalid API key!")
         settings.OMDB_API_KEY = old_api_key
 
-    def test_search_movie_by_valid_title(self):
-        response = search_movie_by_title('The Matrix')
+    @mock.patch(
+        target='apps.movie.api.omdb.search_movie_by_title',
+        return_value=VALID_MOVIE_RESPONSE
+    )
+    def test_search_movie_by_valid_title(self, search_movie_mock):
+        response = search_movie_mock('The Matrix')
         self.assertEqual(response.get('Response'), 'True')
 
-    def test_search_movie_by_not_existing_title(self):
-        response = search_movie_by_title('QWERTYUIOP')
+    @mock.patch(
+        target='apps.movie.api.omdb.search_movie_by_title',
+        return_value=INVALID_MOVIE_RESPONSE_MOVIE_NOT_FOUND
+    )
+    def test_search_movie_by_not_existing_title(self, search_movie_mock):
+        response = search_movie_mock('QWERTYUIOP')
         self.assertEqual(response.get('Response'), 'False')
         self.assertEqual(response.get('Error'), "Movie not found!")

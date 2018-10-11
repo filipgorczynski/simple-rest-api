@@ -1,15 +1,16 @@
+from datetime import datetime
+
 from django.db import transaction
 from django.db.models import F
-
 from django_filters import rest_framework as filters
-from rest_framework import viewsets, status
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from apps.movie.api.omdb import search_movie_by_title
 from apps.movie.exceptions import MovieNotFoundException
 from apps.movie.filters import CommentFilter, MovieFilter
-from apps.movie.models import Movie, Comment
+from apps.movie.models import Actor, Comment, Director, Genre, Movie, Rating
 from apps.movie.serializers import (
     CommentSerializer,
     MovieGetSerializer,
@@ -30,7 +31,8 @@ class MovieViewSet(viewsets.ModelViewSet):
             'imdbVotes': 'imdb_votes',
             'imdbID': 'imdb_id',
             'DVD': 'dvd',
-            'boxOffice': 'box_office',
+            'BoxOffice': 'box_office',
+            'totalSeasons': 'total_seasons'
         }
         new_dict = {
             key.lower(): value for key, value in resp.items()
@@ -40,6 +42,13 @@ class MovieViewSet(viewsets.ModelViewSet):
             if resp.get(key):
                 new_dict[new_key] = resp[key]
         return new_dict
+
+    @staticmethod
+    def _convert_dates(resp):
+        for key, value in resp.items():
+            if key in {'released', 'dvd'}:
+                date = datetime.strptime(value, "%d %b %Y")
+                resp[key] = date.strftime("%Y-%m-%d")
 
     def create(self, request):
         """
@@ -52,22 +61,48 @@ class MovieViewSet(viewsets.ModelViewSet):
             if response.get('Response') == 'False':
                 raise MovieNotFoundException()
 
-            self._fix_field_names(response)
-
+            response = self._fix_field_names(response)
+            self._convert_dates(response)
             try:
                 Movie.objects.get(title=title)
             except Movie.DoesNotExist:
-                serializer.save()
+                with transaction.atomic():
+                    actors = response.pop('actors')
+                    directors = response.pop('director')
+                    genres = response.pop('genre')
+                    ratings = response.pop('ratings')
+                    response.pop('response')
+                    movie = Movie.objects.create(**response)
 
-            return Response(
-                data=serializer.data,
-                status=status.HTTP_201_CREATED
-            )
+                    self._add_movie_relation(Actor, actors, movie)
+                    self._add_movie_relation(Director, directors, movie)
+                    self._add_movie_relation(Genre, genres, movie)
+
+                    for rating in ratings:
+                        rating_instance = Rating.objects.create(
+                            source=rating['Value'].strip(),
+                            value=rating['Value'].strip()
+                        )
+                        rating_instance.movies.add(movie)
+                        rating_instance.save()
+
+                    serializer = MovieGetSerializer(data=movie)
+                    if serializer.is_valid():
+                        return Response(
+                            data=serializer.errors,
+                            status=status.HTTP_201_CREATED
+                        )
 
         return Response(
             data=serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+    def _add_movie_relation(self, model, data, movie):
+        for item in data.split(','):
+            instance = model.objects.get_or_create(name=item.strip())
+            instance[0].movies.add(movie)
+            instance[0].save()
 
     def list(self, request):
         movies = Movie.objects.all()

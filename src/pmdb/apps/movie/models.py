@@ -82,6 +82,7 @@ class Movie(TimeStampedModel):
     box_office = models.CharField(max_length=255, blank=True)
     production = models.CharField(max_length=255, blank=True)
     website = models.URLField(max_length=255, blank=True)
+    total_seasons = models.CharField(max_length=255)
     comments_counter = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
