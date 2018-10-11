@@ -1,0 +1,58 @@
+[
+  {
+    "model": "movie.Movie",
+    "pk": 1,
+    "fields": {
+      "title": "Matrix",
+      "year": "1999",
+      "rated": "R",
+      "released": "1999-03-31",
+      "runtime": "136 min",
+      "writer": "Lilly Wachowski, Lana Wachowski",
+      "plot": "A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.",
+      "language": "English",
+      "country": "USA",
+      "awards": "Won 4 Oscars. Another 34 wins & 48 nominations.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+      "metascore": "73",
+      "imdb_rating": "8.7",
+      "imdb_votes": "1,435,731",
+      "imdb_id": "tt0133093",
+      "type": "movie",
+      "dvd": "1999-08-21",
+      "box_office": "N/A",
+      "production": "Warner Bros. Pictures",
+      "website": "http://www.whatisthematrix.com",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
+    }
+  },
+  {
+    "model": "movie.Movie",
+    "pk": 1,
+    "fields": {
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": "2001",
+      "rated": "PG-13",
+      "released": "2001-12-19",
+      "runtime": "178 min",
+      "writer": "J.R.R. Tolkien (novel), Fran Walsh (screenplay), Philippa Boyens (screenplay), Peter Jackson (screenplay)",
+      "plot": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
+      "language": "English, Sindarin",
+      "country": "New Zealand, USA",
+      "awards": "Won 4 Oscars. Another 113 wins & 123 nominations.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BN2EyZjM3NzUtNWUzMi00MTgxLWI0NTctMzY4M2VlOTdjZWRiXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg",
+      "metascore": "92",
+      "imdb_rating": "8.8",
+      "imdb_votes": "1,441,532",
+      "imdb_id": "tt0120737",
+      "type": "movie",
+      "dvd": "2002-08-06",
+      "box_office": "$314,000,000",
+      "production": "New Line Cinema",
+      "website": "http://www.lordoftherings.net/film/trilogy/thefellowship.html",
+      "created": "2018-10-11",
+      "modified": "2018-10-11"
+    }
+  }
+]
