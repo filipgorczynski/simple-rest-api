@@ -1,4 +1,3 @@
-import pytest
 from parameterized import parameterized
 from rest_framework import status
 from rest_framework.reverse import reverse
@@ -19,18 +18,44 @@ class CommentTestCase(APITestCase):
         response = http_method(reverse('comment-list'))
         self.assertGreaterEqual(response.status_code, expected_status)
 
-    @pytest.mark.skip("TODO")
-    def test_create_comment(self, comment):
-        self.assertFalse(True)
+    def test_create_comment(self):
+        comment = {
+            'body': 'This is a comment test body',
+            'movie_id': 1,
+        }
+        response = self.client.post(
+            reverse('comment-list'),
+            data=comment
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    @pytest.mark.skip("TODO")
-    def test_create_comment_invalid_movie_id(self, comment):
-        pass
+    def test_create_comment_no_movie_id(self):
+        comment = {
+            'body': 'This is a comment test body',
+        }
+        response = self.client.post(
+            reverse('comment-list'),
+            data=comment
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    @pytest.mark.skip("TODO")
-    def test_create_comment_no_movie(self, comment):
-        pass
+    def test_create_comment_no_movie_id_in_database(self):
+        comment = {
+            'body': 'This is a comment test body',
+            'movie_id': 99999
+        }
+        response = self.client.post(
+            reverse('comment-list'),
+            data=comment
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-    @pytest.mark.skip("TODO")
-    def test_create_comment_no_body(self, comment):
-        pass
+    def test_create_comment_no_body(self):
+        comment = {
+            'movie_id': 1,
+        }
+        response = self.client.post(
+            reverse('comment-list'),
+            data=comment
+        )
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import Count
 from django_extensions.db.models import TimeStampedModel
 
 
@@ -83,6 +82,7 @@ class Movie(TimeStampedModel):
     box_office = models.CharField(max_length=255, blank=True)
     production = models.CharField(max_length=255, blank=True)
     website = models.URLField(max_length=255, blank=True)
+    comments_counter = models.IntegerField(default=0, blank=True)
 
     def __str__(self):
         return self.title
@@ -91,20 +91,6 @@ class Movie(TimeStampedModel):
         return "<{} {}>".format(
             self.__class__.__name__, self.title
         )
-
-    def get_top(self, start=None, end=None):
-        """
-
-        SQL Query:
-        SELECT
-             COUNT(movie_id) AS total, mm.*
-        FROM movie_comment AS mc
-        INNER JOIN
-          movie_movie AS mm ON mc.movie_id = mm.id
-        GROUP BY mc.movie_id
-        ORDER BY total desc;
-        """
-        return Comment.objects.all().values('movie_movie.title', 'COUNT(movie_id) AS total').annotate(total=Count('movie')).order_by('-total')
 
 
 class Comment(TimeStampedModel):

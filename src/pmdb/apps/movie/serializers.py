@@ -37,7 +37,7 @@ class RatingSerializer(serializers.HyperlinkedModelSerializer):
 class MoviePostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Movie
-        fields = ('title', 'created', 'modified',)
+        fields = ('title',)
 
 
 class MovieGetSerializer(serializers.HyperlinkedModelSerializer):
@@ -53,7 +53,7 @@ class MovieGetSerializer(serializers.HyperlinkedModelSerializer):
             'director', 'writer', 'actors', 'plot', 'language', 'country',
             'awards', 'poster', 'ratings', 'metascore', 'imdb_rating',
             'imdb_votes', 'imdb_id', 'type', 'dvd', 'box_office',
-            'production', 'website', 'created', 'modified',
+            'production', 'website', 'comments_counter', 'created', 'modified',
         )
 
 
@@ -61,4 +61,4 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ('body', 'movie', 'created', 'modified',)
+        fields = ('body', 'movie', 'movie_id', 'created', 'modified',)

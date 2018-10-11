@@ -1,21 +1,20 @@
-from django_filters import NumberFilter
-from django_filters.rest_framework import FilterSet
+from django_filters import rest_framework as filters
 
-from apps.movie.models import Movie
+from apps.movie.models import Movie, Comment
 
 
-class MovieFilter(FilterSet):
-    year = NumberFilter(name='year')
-    # doer_id = NumberFilter(name='employee_doer__id')
-    # both_id = NumberFilter(method='filter_both')
+class MovieFilter(filters.FilterSet):
+    year = filters.DateFromToRangeFilter(field_name="year")
+    release = filters.DateFromToRangeFilter(field_name="year")
 
     class Meta:
         model = Movie
-        fields = {
-            'year',
-        }
-    #
-    # def filter_both(self, queryset, name, value):
-    #     return queryset.filter(
-    #         Q(employee_owner__id=value) | Q(employee_doer__id=value)
-    #     )
+        fields = ['year', 'release']
+
+
+class CommentFilter(filters.FilterSet):
+    date_range = filters.DateFromToRangeFilter(field_name="created")
+
+    class Meta:
+        model = Comment
+        fields = ['movie_id', 'date_range']

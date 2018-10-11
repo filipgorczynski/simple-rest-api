@@ -56,10 +56,13 @@ class ApiOMDBTestCase(TestCase):
             search_movie_by_title('')
 
     def test_search_movie_by_title_invalid_apikey(self):
-        search_movie_by_title.params = {'apikey': 'INVALID'}
+        from django.conf import settings
+        old_api_key = settings.OMDB_API_KEY
+        settings.OMDB_API_KEY = 'INVALID'
         response = search_movie_by_title('The Matrix')
         self.assertEqual(response.get('Response'), 'False')
         self.assertEqual(response.get('Error'), "Invalid API key!")
+        settings.OMDB_API_KEY = old_api_key
 
     def test_search_movie_by_valid_title(self):
         response = search_movie_by_title('The Matrix')

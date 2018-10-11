@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'rest_framework',
+    'django_filters',
 ]
 
 PROJECT_APPS = [
@@ -135,8 +136,8 @@ OMDB_API_KEY = config.get('omdb', 'api_key')
 OMDB_ROOT_URL = config.get('omdb', 'root_url')
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
-    )
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
 }
