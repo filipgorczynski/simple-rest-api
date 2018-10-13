@@ -37,7 +37,8 @@
       "id": "4",
       "name": "Adventure",
       "created": "2018-10-11",
-      "modified": "2018-10-11"
+      "modified": "2018-10-11",
+      "movies": [2]
     }
   },
   {

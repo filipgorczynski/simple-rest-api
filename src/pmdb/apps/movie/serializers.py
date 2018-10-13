@@ -1,3 +1,4 @@
+from django.core.serializers import serialize
 from rest_framework import serializers
 
 from .models import Actor, Comment, Director, Genre, Movie, Rating
@@ -33,19 +34,11 @@ class MoviePostSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('title',)
 
 
-class MovieGetSerializer(serializers.HyperlinkedModelSerializer):
+class MovieGetSerializer(serializers.ModelSerializer):
     genre = GenreSerializer(many=True)
     director = DirectorSerializer(many=True)
     actors = ActorSerializer(many=True)
     ratings = RatingSerializer(many=True)
-
-    def create(self, validated_data):
-        return Comment.objects.create(**validated_data)
-
-    def update(self, instance, validated_data):
-        instance.email = validated_data.get('email', instance.email)
-        instance.save()
-        return instance
 
     class Meta:
         model = Movie
@@ -54,9 +47,15 @@ class MovieGetSerializer(serializers.HyperlinkedModelSerializer):
             'director', 'writer', 'actors', 'plot', 'language', 'country',
             'awards', 'poster', 'ratings', 'metascore', 'imdb_rating',
             'imdb_votes', 'imdb_id', 'type', 'dvd', 'box_office',
-            'production', 'website', 'comments_counter', 'created',
+            'production', 'website', 'total_comments', 'created',
             'modified', 'total_seasons',
         )
+
+
+class MovieTopSerializer(serializers.Serializer):
+    movie_id = serializers.IntegerField()
+    total_comments = serializers.IntegerField()
+    rank = serializers.IntegerField()
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):

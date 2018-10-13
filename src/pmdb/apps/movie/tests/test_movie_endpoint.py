@@ -11,15 +11,13 @@ from apps.movie.tests.test_api_omdb import VALID_MOVIE_RESPONSE
 
 
 class MovieTestCase(APITestCase):
-    # FIXME: 'ManyToManyRel' object has no attribute 'to_python':
-    # FIXME: (movie.Actor:pk=2) field_value was '[1]'
-    # fixtures = [
-    #     'movies',
-    #     'actors',
-    #     'directors',
-    #     'genres',
-    #     'ratings',
-    # ]
+    fixtures = [
+        'movies',
+        'actors',
+        'directors',
+        'genres',
+        'ratings',
+    ]
 
     @mock.patch(
         target='apps.movie.rest_views.search_movie_by_title',
@@ -106,7 +104,6 @@ class MovieTestCase(APITestCase):
     @parameterized.expand([
         param({}, {}),
         param({'released': '12 Jan 2018'}, {'released': '2018-01-12'}),
-        # param({'released': '33 Mod 9999'}, {'released': '2018-01-12'}),
         param({'dvd': '12 Jan 2018'}, {'dvd': '2018-01-12'}),
         param({'DVD': '12 Jan 2018'}, {'DVD': '12 Jan 2018'}),
         param({'Django': '12 Jan 2018'}, {'Django': '12 Jan 2018'}),
@@ -122,4 +119,9 @@ class MovieTestCase(APITestCase):
         ),
     ])
     def test_convert_dates(self, resp, expected):
-        self.assertDictEqual(MovieViewSet._convert_dates(resp), expected)
+        MovieViewSet._convert_dates(resp)
+        self.assertDictEqual(resp, expected)
+
+    def test_convert_dates_invalid_date(self):
+        with pytest.raises(ValueError):
+            MovieViewSet._convert_dates({'released': '33 Mod 9999'})
