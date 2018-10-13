@@ -1,6 +1,7 @@
 # Simple REST API
 
 
+
 ## Task
 
 Build simple REST API - a basic movie database interacting with external API.
@@ -11,7 +12,7 @@ Full specification of endpoints:
 - [X] Request body should contain only movie title, and its presence should be validated.
 - [X] Based on passed title, other movie details should be fetched from http://www.omdbapi.com/
       (or other similar, public movie database) - and saved to application database.
-- [ ] Request response should include full movie object, along with all data fetched from external API.
+- [X] Request response should include full movie object, along with all data fetched from external API.
 
 **GET /movies:**
 
@@ -67,9 +68,9 @@ Example response:
 
 The goal is to implement REST API in Django, however feel free to use any third-party libraries and database
 of your choice, but please share your reasoning behind choosing them.
-- [ ] At least basic tests of endpoints and their functionality are obligatory.
+- [X] At least basic tests of endpoints and their functionality are obligatory.
       Their exact scope and form is left up to you.
-- [ ] The application's code should be kept in a public repository so that we can read it, pull it and build
+- [X] The application's code should be kept in a public repository so that we can read it, pull it and build
       it ourselves. Remember to include README file or at least basic notes on application requirements
       and setup - we should be able to easily and quickly get it running.
 - [ ] Written application must be hosted and publicly available for online - example Heroku.

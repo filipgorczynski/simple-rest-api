@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import pytest
 from mock import mock
 from parameterized import param, parameterized
@@ -11,26 +13,26 @@ from apps.movie.rest_views import MovieViewSet
 from apps.movie.tests.test_api_omdb import VALID_MOVIE_RESPONSE
 
 EXPECTED_TOP_MOVIES = [
-    {
-        "movie_id": 4,
-        "total_comments": 4,
-        "rank": 1
-    },
-    {
-        "movie_id": 3,
-        "total_comments": 2,
-        "rank": 2
-    },
-    {
-        "movie_id": 4,
-        "total_comments": 2,
-        "rank": 2
-    },
-    {
-        "movie_id": 1,
-        "total_comments": 0,
-        "rank": 3
-    },
+    OrderedDict([
+        ("movie_id", 4),
+        ("total_comments", 4),
+        ("rank", 1)
+    ]),
+    OrderedDict([
+        ("movie_id", 3),
+        ("total_comments", 2),
+        ("rank", 2)
+    ]),
+    OrderedDict([
+        ("movie_id", 2),
+        ("total_comments", 2),
+        ("rank", 2)
+    ]),
+    OrderedDict([
+        ("movie_id", 1),
+        ("total_comments", 0),
+        ("rank", 3)
+    ]),
 ]
 
 
@@ -84,10 +86,14 @@ class MovieTestCase(APITestCase):
             response.status_code,
             status.HTTP_200_OK,
         )
-        # FIXME: self.assertDictEqual(
-        #     response.data,
-        #     EXPECTED_TOP_MOVIES
-        # )
+        self.assertEqual(
+            response.data,
+            EXPECTED_TOP_MOVIES
+        )
+
+    @pytest.mark.skip("Provide date range filters for comments")
+    def test_top_movies_with_date_range(self):
+        pass
 
     @mock.patch(
         target='apps.movie.rest_views.search_movie_by_title',
