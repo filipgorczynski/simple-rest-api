@@ -88,7 +88,7 @@ class MovieViewSet(viewsets.ModelViewSet):
 
                     for rating in ratings:
                         rating_instance = Rating.objects.create(
-                            source=rating['Value'].strip(),
+                            source=rating['Source'].strip(),
                             value=rating['Value'].strip()
                         )
                         rating_instance.movies.add(movie)
@@ -96,12 +96,11 @@ class MovieViewSet(viewsets.ModelViewSet):
 
                     movie.save()
 
-            serializer = MovieGetSerializer(data=movie)
-            if serializer.is_valid():
-                return Response(
-                    data=serializer.data,
-                    status=status.HTTP_201_CREATED
-                )
+            serializer = MovieGetSerializer(movie)
+            return Response(
+                data=serializer.data,
+                status=status.HTTP_201_CREATED
+            )
 
         return Response(
             data=serializer.errors,
@@ -120,7 +119,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     @action(methods=['GET'], detail=False)
     def top(self, request):
         """"""
-        top_movies = Movie.objects.all().order_by('-total_comments')
+        top_movies = Movie.objects.all().order_by('-total_comments', 'title')
         response = []
         next_rank = prev_comment_count = 0
         for movie in top_movies:
@@ -159,9 +158,16 @@ class CommentViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             with transaction.atomic():
                 serializer.save()
-                movie = request.data.get('movie_id')
-                Movie.objects.filter(pk=movie).update(
-                    comments_counter=F('comments_counter') + 1
+                movie_id = request.data.get('movie_id')
+                try:
+                    Movie.objects.get(pk=movie_id)
+                except Movie.DoesNotExist:
+                    return Response(
+                        serializer.errors,
+                        status.HTTP_400_BAD_REQUEST
+                    )
+                Movie.objects.filter(pk=movie_id).update(
+                    total_comments=F('total_comments') + 1
                 )
 
                 return Response(

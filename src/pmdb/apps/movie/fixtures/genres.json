@@ -17,7 +17,8 @@
       "id": "2",
       "name": "Comedy",
       "created": "2018-10-11",
-      "modified": "2018-10-11"
+      "modified": "2018-10-11",
+      "movies": [3, 4]
     }
   },
   {
@@ -70,7 +71,7 @@
       "name": "Drama",
       "created": "2018-10-11",
       "modified": "2018-10-11",
-      "movies": [2]
+      "movies": [2, 3]
     }
   },
   {
@@ -82,6 +83,17 @@
       "created": "2018-10-11",
       "modified": "2018-10-11",
       "movies": [2]
+    }
+  },
+  {
+    "model": "movie.Genre",
+    "pk": 9,
+    "fields": {
+      "id": "9",
+      "name": "Crime",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [3]
     }
   }
 ]

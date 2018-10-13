@@ -70,5 +70,65 @@
       "modified": "2018-10-11",
       "movies": [2]
     }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 7,
+    "fields": {
+      "id": "7",
+      "source": "Internet Movie Database",
+      "value": "7.8/10",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [4]
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 8,
+    "fields": {
+      "id": "8",
+      "source": "Rotten Tomatoes",
+      "value": "88%",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [4]
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 9,
+    "fields": {
+      "id": "9",
+      "source": "Metacritic",
+      "value": "70/100",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [4]
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 10,
+    "fields": {
+      "id": "10",
+      "source": "Internet Movie Database",
+      "value": "7.1/10",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [3]
+    }
+  },
+  {
+    "model": "movie.Rating",
+    "pk": 11,
+    "fields": {
+      "id": "11",
+      "source": "Rotten Tomatoes",
+      "value": "80%",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [3]
+    }
   }
 ]

@@ -1,13 +1,18 @@
 import unittest
 
-import pytest
-
 from apps.movie.serializers import CommentSerializer
 
 
 class CommentSerializerTestCase(unittest.TestCase):
+    fixtures = [
+        'movies',
+        'actors',
+        'comments',
+        'directors',
+        'genres',
+        'ratings',
+    ]
 
-    @pytest.mark.skip("TODO")
     def test_valid_data(self):
         serializer = CommentSerializer(data={
             'movie_id': 1,

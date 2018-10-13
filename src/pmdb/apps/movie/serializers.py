@@ -58,7 +58,9 @@ class MovieTopSerializer(serializers.Serializer):
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):
+    movie_id = serializers.IntegerField()
+    body = serializers.CharField()
 
     class Meta:
         model = Comment
-        fields = ('body', 'movie', 'movie_id', 'created', 'modified',)
+        fields = ('body', 'movie_id', 'created', 'modified',)
