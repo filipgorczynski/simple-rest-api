@@ -1,4 +1,3 @@
-from django.core.serializers import serialize
 from rest_framework import serializers
 
 from .models import Actor, Comment, Director, Genre, Movie, Rating

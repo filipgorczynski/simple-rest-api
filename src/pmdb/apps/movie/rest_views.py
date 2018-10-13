@@ -15,7 +15,8 @@ from apps.movie.serializers import (
     CommentSerializer,
     MovieGetSerializer,
     MoviePostSerializer,
-    MovieTopSerializer)
+    MovieTopSerializer,
+)
 
 
 class MovieViewSet(viewsets.ModelViewSet):
