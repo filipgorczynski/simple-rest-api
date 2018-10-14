@@ -5,6 +5,7 @@ python:
 
 before_script:
   - cd src/pmdb
+  - cp credentials.conf.template credentials.conf
 
 script:
   - pytest
