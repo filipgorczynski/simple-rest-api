@@ -4,8 +4,7 @@ python:
   - "3.6"
 
 before_script:
-  - pwd
-  - cd ~/filipgorczynski/simple-rest-api/src/pdms
+  - cd src/pdms
 
 script:
   - pytest
