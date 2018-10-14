@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import pytest
 from mock import mock
 from parameterized import param, parameterized
@@ -5,21 +7,44 @@ from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
+from apps.movie.exceptions import OMDBException
 from apps.movie.models import Movie
 from apps.movie.rest_views import MovieViewSet
 from apps.movie.tests.test_api_omdb import VALID_MOVIE_RESPONSE
 
+EXPECTED_TOP_MOVIES = [
+    OrderedDict([
+        ("movie_id", 4),
+        ("total_comments", 4),
+        ("rank", 1)
+    ]),
+    OrderedDict([
+        ("movie_id", 3),
+        ("total_comments", 2),
+        ("rank", 2)
+    ]),
+    OrderedDict([
+        ("movie_id", 2),
+        ("total_comments", 2),
+        ("rank", 2)
+    ]),
+    OrderedDict([
+        ("movie_id", 1),
+        ("total_comments", 0),
+        ("rank", 3)
+    ]),
+]
+
 
 class MovieTestCase(APITestCase):
-    # FIXME: 'ManyToManyRel' object has no attribute 'to_python':
-    # FIXME: (movie.Actor:pk=2) field_value was '[1]'
-    # fixtures = [
-    #     'movies',
-    #     'actors',
-    #     'directors',
-    #     'genres',
-    #     'ratings',
-    # ]
+    fixtures = [
+        'movies',
+        'actors',
+        'comments',
+        'directors',
+        'genres',
+        'ratings',
+    ]
 
     @mock.patch(
         target='apps.movie.rest_views.search_movie_by_title',
@@ -27,28 +52,27 @@ class MovieTestCase(APITestCase):
     )
     def test_create_valid_movie(self, search_movie_by_title):
         """"""
-        self.client.post(
+        response = self.client.post(
             reverse('movie-list'),
             data={'title': 'The Matrix', }
         )
         counter = Movie.objects.filter(title='The Matrix').count()
         self.assertEqual(counter, 1)
-        # FIXME self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_return_all_movies(self):
         response = self.client.get(reverse('movie-list'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.data), 4)
 
     def test_create_movie_no_title(self):
-        movie = {
-            'year': '2018',
-        }
+        counter = Movie.objects.all().count()
+        movie = {}
         response = self.client.post(
             reverse('movie-list'),
             data=movie
         )
-        counter = Movie.objects.filter(title='Matrix').count()
-        self.assertEqual(counter, 0)
+        self.assertEqual(counter, 4)
         self.assertEqual(
             response.status_code,
             status.HTTP_400_BAD_REQUEST
@@ -60,31 +84,38 @@ class MovieTestCase(APITestCase):
         )
         self.assertEqual(
             response.status_code,
-            status.HTTP_200_OK
+            status.HTTP_200_OK,
+        )
+        self.assertEqual(
+            response.data,
+            EXPECTED_TOP_MOVIES
         )
 
-    @pytest.mark.skip("TODO")
+    @pytest.mark.skip("Provide date range filters for comments")
+    def test_top_movies_with_date_range(self):
+        pass
+
     @mock.patch(
         target='apps.movie.rest_views.search_movie_by_title',
         return_value=VALID_MOVIE_RESPONSE
     )
-    def test_create_movie_already_in_database(self):
+    def test_create_movie_already_in_database(self, search_movie_mock):
         movie = {
-            'title': 'The Matrix',
+            'title': 'Sneakers',
         }
         response = self.client.post(
             reverse('movie-list'),
             data=movie
         )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data.get('imdb_id'), "tt0105435")
 
-    @pytest.mark.skip("TODO")
     def test_no_existing_movie(self):
-        response = self.client.post(
-            reverse('movie-list'),
-            data={'title': 'QWERTYUIOP'}
-        )
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        with pytest.raises(OMDBException):
+            self.client.post(
+                reverse('movie-list'),
+                data={'title': 'QWERTYUIOP'}
+            )
 
     @parameterized.expand([
         param({}, {}),
@@ -106,7 +137,6 @@ class MovieTestCase(APITestCase):
     @parameterized.expand([
         param({}, {}),
         param({'released': '12 Jan 2018'}, {'released': '2018-01-12'}),
-        # param({'released': '33 Mod 9999'}, {'released': '2018-01-12'}),
         param({'dvd': '12 Jan 2018'}, {'dvd': '2018-01-12'}),
         param({'DVD': '12 Jan 2018'}, {'DVD': '12 Jan 2018'}),
         param({'Django': '12 Jan 2018'}, {'Django': '12 Jan 2018'}),
@@ -122,4 +152,9 @@ class MovieTestCase(APITestCase):
         ),
     ])
     def test_convert_dates(self, resp, expected):
-        self.assertDictEqual(MovieViewSet._convert_dates(resp), expected)
+        MovieViewSet._convert_dates(resp)
+        self.assertDictEqual(resp, expected)
+
+    def test_convert_dates_invalid_date(self):
+        with pytest.raises(ValueError):
+            MovieViewSet._convert_dates({'released': '33 Mod 9999'})

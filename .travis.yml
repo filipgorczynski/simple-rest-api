@@ -1,0 +1,14 @@
+language: python
+
+python:
+  - "3.6"
+
+before_script:
+  - cd src/pmdb
+  - cp credentials.conf.template credentials.conf
+
+script:
+  - pytest
+
+install:
+  - pip install -r src/pmdb/requirements.txt

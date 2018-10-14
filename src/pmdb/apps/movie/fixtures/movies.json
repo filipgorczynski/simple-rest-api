@@ -3,6 +3,7 @@
     "model": "movie.Movie",
     "pk": 1,
     "fields": {
+      "id": 1,
       "title": "Matrix",
       "year": "1999",
       "rated": "R",
@@ -24,13 +25,15 @@
       "production": "Warner Bros. Pictures",
       "website": "http://www.whatisthematrix.com",
       "created": "2018-10-11",
-      "modified": "2018-10-11"
+      "modified": "2018-10-11",
+      "total_comments": 0
     }
   },
   {
     "model": "movie.Movie",
-    "pk": 1,
+    "pk": 2,
     "fields": {
+      "id": 2,
       "title": "The Lord of the Rings: The Fellowship of the Ring",
       "year": "2001",
       "rated": "PG-13",
@@ -52,7 +55,68 @@
       "production": "New Line Cinema",
       "website": "http://www.lordoftherings.net/film/trilogy/thefellowship.html",
       "created": "2018-10-11",
-      "modified": "2018-10-11"
+      "modified": "2018-10-11",
+      "total_comments": 2
+    }
+  },
+  {
+    "model": "movie.Movie",
+    "pk": 3,
+    "fields": {
+      "id": 3,
+      "title": "Sneakers",
+      "year": "1992",
+      "rated": "PG-13",
+      "released": "1992-09-11",
+      "runtime": "126 min",
+      "writer": "Phil Alden Robinson, Lawrence Lasker, Walter F. Parkes",
+      "plot": "A security pro finds his past coming back to haunt him, when he and his unique team are tasked with retrieving a particularly important item.",
+      "language": "English, Russian, Chinese",
+      "country": "USA",
+      "awards": "2 nominations.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BYWM2OWI0OTAtYTVlOC00YTA0LTllMTItNWM5OTIwZDJlYWFmXkEyXkFqcGdeQXVyNDk3NzU2MTQ@._V1_SX300.jpg",
+      "metascore": "N/A",
+      "imdb_rating": "7.1",
+      "imdb_votes": "47,743",
+      "imdb_id": "tt0105435",
+      "type": "movie",
+      "dvd": "1998-03-31",
+      "box_office": "N/A",
+      "production": "Universal Pictures",
+      "website": "N/A",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "total_comments": 2
+    }
+  },
+  {
+    "model": "movie.Movie",
+    "pk": 4,
+    "fields": {
+      "id": 4,
+      "title": "Clerks",
+      "year": "1994",
+      "rated": "R",
+      "released": "1994-11-09",
+      "runtime": "92 min",
+      "writer": "Kevin Smith",
+      "plot": "A day in the lives of two convenience clerks named Dante and Randal as they annoy customers, discuss movies, and play hockey on the store roof.",
+      "language": "English",
+      "country": "USA",
+      "awards": "5 wins & 10 nominations.",
+      "poster": "https://m.media-amazon.com/images/M/MV5BNzE1Njk0NmItNDhlMC00ZmFlLWI4ZTUtYTY4ZjgzNjkyMTU1XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+      "metascore": "70",
+      "imdb_rating": "7.8",
+      "imdb_votes": "196,863",
+      "imdb_id": "tt0109445",
+      "type": "movie",
+      "dvd": "1999-06-29",
+      "box_office": "N/A",
+      "production": "Miramax Films",
+      "website": "N/A",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "total_comments": 4
     }
   }
 ]

@@ -41,5 +41,27 @@
       "modified": "2018-10-11",
       "movies": [2]
     }
+  },
+  {
+    "model": "movie.Director",
+    "pk": 5,
+    "fields": {
+      "id": "5",
+      "name": "Kevin Smith",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [4]
+    }
+  },
+  {
+    "model": "movie.Director",
+    "pk": 6,
+    "fields": {
+      "id": "6",
+      "name": "Phil Alden Robinson",
+      "created": "2018-10-11",
+      "modified": "2018-10-11",
+      "movies": [3]
+    }
   }
 ]

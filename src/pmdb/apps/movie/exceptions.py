@@ -1,5 +1,5 @@
-"""Movie application Exceptions"""
+"""OMDB Exceptions"""
 
 
-class MovieNotFoundException(Exception):
+class OMDBException(Exception):
     pass
