@@ -30,7 +30,7 @@ SECRET_KEY = '85(=)ltagltaj1ef@9foaasosub$5^qh4dkkt@i-j@zs7(r(qx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config.get('default', 'allowed_hosts', [])
 
 
 # Application definition
@@ -131,6 +131,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 OMDB_API_KEY = config.get('omdb', 'api_key')
 OMDB_ROOT_URL = config.get('omdb', 'root_url')
