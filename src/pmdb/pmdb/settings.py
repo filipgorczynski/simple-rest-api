@@ -30,7 +30,10 @@ SECRET_KEY = '85(=)ltagltaj1ef@9foaasosub$5^qh4dkkt@i-j@zs7(r(qx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = config.get('default', 'allowed_hosts', [])
+ALLOWED_HOSTS = list(filter(
+    None,
+    config.get('default', 'allowed_hosts').split(",")
+))
 
 
 # Application definition
